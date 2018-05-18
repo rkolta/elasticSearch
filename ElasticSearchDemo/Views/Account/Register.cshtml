@@ -1,0 +1,43 @@
+﻿@model ElasticSearchDemo.Models.RegisterModel
+@{
+    ViewBag.Title = "Register";
+}
+
+
+<div class="col-md-6" style="margin: auto; float: none">
+    <div class="panel panel-primary" style="box-shadow: 5px 5px 15px gray;">
+        <div class="panel-heading">
+            <h3>@ViewBag.Title</h3>
+        </div>
+        <div class="panel-body">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary()
+
+                <fieldset>
+                    <legend>Registration Form</legend>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.UserName)
+                        @Html.TextBoxFor(m => m.UserName,  new { @Class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Password)
+                        @Html.PasswordFor(m => m.Password,  new { @Class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ConfirmPassword)
+                        @Html.PasswordFor(m => m.ConfirmPassword,  new { @Class = "form-control" })
+                    </div>
+
+                    <input type="submit" value="Register" class="btn btn-primary" />
+                </fieldset>
+
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

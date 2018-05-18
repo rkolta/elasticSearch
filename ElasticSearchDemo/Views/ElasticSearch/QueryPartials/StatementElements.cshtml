@@ -1,0 +1,25 @@
+﻿@{
+    ElasticSearchDemo.Models.QueryBuilder.Statement statement = Model.Statement;
+    int index = Model.Index;
+ }
+
+<div class="statement form-inline"
+     @if (index == 0)
+        {
+            @:style="margin-left: 44px;"
+        }
+    >
+
+    @Html.Partial("QueryPartials/Elements/QueryOperator", statement)
+    @Html.Partial("QueryPartials/Elements/Fields", statement)
+    @Html.Partial("QueryPartials/Elements/FieldOperator", statement)
+    @Html.Partial("QueryPartials/Elements/SearchParam", statement)
+
+    <button class="delete-statement btn btn-danger" 
+        @if (index == 0)
+        {
+            @:style="display: none"
+        }
+        >
+        <i class="fa fa-trash"></i> Delete</button>
+</div>

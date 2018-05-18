@@ -1,0 +1,16 @@
+﻿@model ElasticSearchDemo.Models.QueryBuilder.Statement
+
+@{
+    IEnumerable<ElasticSearchDemo.Models.QueryBuilder.Field> fields = ViewBag.Fields;   
+}
+
+<select class="form-control field mb-2 mr-sm-2 mb-sm-0" title="Field">
+    <option hidden>Select Field</option>
+    @foreach (var field in fields)
+    {
+        <option value="@field.FieldId"
+                @if (Model.FieldId == field.FieldId)
+                {<text>selected</text>}
+                >@field.DisplayName</option>
+    }
+</select>

@@ -1,0 +1,28 @@
+﻿@{
+    List<ElasticSearchDemo.Models.QueryBuilder.Query> queries = ViewBag.SavedQueries;
+    List<ElasticSearchDemo.Models.QueryBuilder.Query> public_queries = ViewBag.PublicSavedQueries;
+}
+<div class="col-lg-2 navbar-default" style="display: flex; flex-direction: column; padding-top: 20px; margin-top: -20px;">
+    <div class="query-list">
+        <div class="alert alert-success">
+            Stored Queries:
+        </div>
+        @foreach (var query in queries)
+        {
+            @Html.Partial("QueryPartials/SavedQueryItem", query)
+        }
+    </div>
+    <div class="public-query-list">
+        <div class="alert alert-success">
+            Shared Queries:
+        </div>
+        @foreach (var query in public_queries)
+        {
+            @Html.Partial("QueryPartials/SavedQueryItem", query)
+        }
+    </div>
+</div>
+
+<div class="saved-query-prototype" style="display: none">
+    @Html.Partial("QueryPartials/SavedQueryItem", new ElasticSearchDemo.Models.QueryBuilder.Query());
+</div>

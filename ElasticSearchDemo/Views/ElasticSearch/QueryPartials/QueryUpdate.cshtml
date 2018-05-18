@@ -1,0 +1,48 @@
+﻿@{
+    List<ElasticSearchDemo.Models.UserProfile> users = ViewBag.Users;
+}
+@model ElasticSearchDemo.Models.QueryBuilder.Query
+<!-- Modal -->
+<div id="updateQueryModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header alert-warning">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Update Query</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-elements">
+                    <label>Query Name:</label>
+                    <input type="text" class="update-query-name form-control" />
+                </div>
+                <div class="form-elements">
+                    <label>Color Code:</label>
+                    <div id="cp3" class="input-group colorpicker-component update-query-color" style="width: 200px">
+                        <input type="text" value="#00AABB" class="form-control update-color-code" readonly />
+                        <span class="input-group-addon"><i></i></span>
+
+                    </div>
+                </div>
+                <div class="form-elements form-check">
+                    <label class="form-check-label">
+                        Public:
+                    <input type="checkbox" class="public-update-check form-check-input" />
+                    </label>
+                    <br />
+                    <select id="multiple-user-select-update" multiple="multiple" disabled>
+                        @foreach (var user in users)
+                        {
+                            <option value="@user.UserId">@user.UserName</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary confirm-update" data-dismiss="modal">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+﻿@model ElasticSearchDemo.Models.QueryBuilder.Statement
+@if (Model.Field != null)
+{
+        
+    <input type="text" class="form-control searchparam1 mb-2 mr-sm-2 mb-sm-0" value="@Model.SearchParam1"/>
+
+    <input type="text" 
+            @if (Model.Operator.Symbol != "between")
+            {
+                @:style="display: none" 
+            }
+            class="form-control searchparam2 mb-2 mr-sm-2 mb-sm-0" value="@Model.SearchParam2"/>
+}
+else
+{
+    <input type="text" style="display: none" class="form-control searchparam1 mb-2 mr-sm-2 mb-sm-0" />
+    <input type="text" style="display: none" class="form-control searchparam2 mb-2 mr-sm-2 mb-sm-0" />
+}

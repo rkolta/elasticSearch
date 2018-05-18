@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Search Documents</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<div class="row">
+    <div class="col-lg-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <i class="fa fa-search" aria-hidden="true"></i>
+                Quick Search
+            </div>
+            <div class="panel-body">
+                <form class="navbar-form navbar-left" role="search" method="post" action="@Url.Action("QuickSearch", "ElasticSearch", null)">
+                    <div class="form-group">
+                        <div class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-default active">
+                                <input type="radio" name="options" value="match" id="option1" autocomplete="off" checked>
+                                Match
+                            </label>
+                            <label class="btn btn-default">
+                                <input type="radio" name="options" value="match-phrase" id="option2" autocomplete="off">
+                                Match Phrase
+                            </label>
+                        </div>
+                        <input class="form-control" name="searchparam" placeholder="Search" type="text">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <i class="fa fa-cubes" aria-hidden="true"></i>
+                Query Builder
+            </div>
+            <div class="panel-body navbar-form">
+                    <a href="@Url.Action("QueryBuilder")" class="btn btn-primary">Go to Query Builder!</a>
+            </div>
+        </div>
+    </div>
+</div>

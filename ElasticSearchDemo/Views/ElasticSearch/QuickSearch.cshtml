@@ -1,0 +1,113 @@
+﻿@using Nest
+@using ElasticSearchDemo.Services
+@model ISearchResponse<ElasticSearchDemo.Models.Doc>
+@{
+    ViewBag.Title = "Index";
+    var documents = Model != null ? Model.Documents : new List<ElasticSearchDemo.Models.Doc>();
+}
+@if (Model != null)
+{
+    <h4>Total Documents Found: @Model.Total</h4>
+    <form class="form-inline" method="post" action="@Url.Action("index", "ElasticSearch", null)">
+        <input type="hidden" name="options" value="@ViewBag.Match" />
+        <input type="hidden" name="searchparam" value="@ViewBag.SearchParam" />
+        <div class="form-group">
+            <label>
+                Page:
+            <select name="page" class="form-control">
+                @for (var i = 1; i <= Math.Ceiling((double)Model.Total / (double)ESQueryService.ResultSize); i++)
+                {
+                    <option @if (i == ViewBag.Page)
+                            { <text>selected="selected"</text> } >@i</option>
+                }
+            </select>
+            </label>
+            <input class="form-control btn btn-primary" type="submit" value="Submit" />
+        </div>
+    </form>
+    <br />
+}
+@{var count = 0;}
+@foreach (var doc in documents)
+{
+    <table class="table table-striped table-hover">
+        <tr>
+            <th class="col-md-1">Record #
+            </th>
+            <th class="col-md-2">File Name
+            </th>
+            <th class="col-md-2">Url
+            </th>
+            <th class="col-md-1">File Extentsion
+            </th>
+            <th class="col-md-2">Author
+            </th>
+            <th class="col-md-1">Publisher
+            </th>
+            <th class="col-md-1">Page Count
+            </th>
+            <th class="col-md-1">Line Count
+            </th>
+            <th class="col-md-1">Download
+            </th>
+        </tr>
+        <tr>
+            <td class="col-md-1">
+                @((ViewBag.Page - 1) * ESQueryService.ResultSize + 1 + count)
+            </td>
+            <td class="col-md-2">
+                @doc.File.FileName
+            </td>
+            <td class="col-md-2">
+                @doc.Path.Real
+            </td>
+            <td class="col-md-2">
+                @doc.File.Extension
+            </td>
+            <td class="col-md-1">
+                @doc.Meta.Author
+            </td>
+            <td class="col-md-1">
+                @doc.Meta.Publisher
+            </td>
+            <td class="col-md-1">
+                @doc.Meta.Raw.PageCount
+            </td>
+            <td class="col-md-1">
+                @doc.Meta.Raw.LineCount
+            </td>
+            <td class="col-md-1" style="text-align: center">
+                <a href="@Url.Action("DownloadFile", new { esVirtualPath = doc.Path.Virtual })" class="btn btn-success"><i class="fa fa-download" aria-hidden="true"></i>
+                </a>
+            </td>
+        </tr>
+    </table>
+    
+    var hit = Model.Hits.ElementAtOrDefault(count);
+    if (hit != null)
+    {
+        
+    <table class="table table-hover table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Highlights - Hit Scored: @hit.Score</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var highlightsInEachHit in hit.Highlights)
+            {
+                foreach (var highlight in highlightsInEachHit.Value.Highlights)
+                {
+  
+                <tr>
+                    <td>@Html.Raw(highlight)</td>
+                </tr>
+                               
+                }
+            }
+        </tbody>
+    </table>
+    }
+    count++;
+}

@@ -1,0 +1,32 @@
+﻿<div class="panel panel-default saved-query">
+    <div class="panel-heading">
+        @Model.Name
+    </div>
+    <div class="panel-body">
+        <div class="div-color-code" style="background-color: @Model.ColorCode;">
+        </div>
+        <form method="post" action="@Url.Action("QueryBuilder")" style="display:inline">
+            <input type="hidden" name="id" value="@Model.QueryId" class="load-query-id" />
+            <button class="btn btn-default" type="submit" data-placement="top" data-trigger="hover" data-toggle="popover" data-content="Load Query">
+                <i class="fa fa-external-link" aria-hidden="true"></i> Load
+            </button>
+        </form>
+        <div style="display: inline">
+            <input type="hidden" name="id" value="@Model.QueryId" class="delete-query-id" />
+            @if (Model.Owner == null || Model.Owner.UserName == User.Identity.Name)
+            {
+                <button class="btn btn-danger delete-saved-query"><i class="fa fa-trash"></i> Delete</button>
+                <button class="btn btn-warning edit-saved-query"><i class="fa fa-pencil"></i>
+ Edit</button>
+            }
+            @if (Model.Owner != null && Model.Owner.UserName != User.Identity.Name)
+            {
+                <button class="btn btn-danger unwatch-query" data-placement="top" data-trigger="hover" data-toggle="popover" data-content="Stop tracking query">
+                    <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                </button>
+                <div style="padding-left: 5px; display: inline-block; font-style: italic">Shared By: @Model.Owner.UserName</div>
+                
+            }
+        </div>
+    </div>
+</div>

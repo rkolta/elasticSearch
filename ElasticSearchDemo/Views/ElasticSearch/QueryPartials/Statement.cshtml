@@ -1,0 +1,23 @@
+﻿@model ElasticSearchDemo.Models.QueryBuilder.Query
+<div class="statement-prototype" style="display: none">
+    @Html.Partial("QueryPartials/StatementElements", new { Statement = new ElasticSearchDemo.Models.QueryBuilder.Statement(), Index = -1 })
+</div>
+
+@if (Model.Statements.Count > 0)
+{   
+    <div class="statements">
+        @{var count = 0;}
+        @foreach (var statement in Model.Statements)
+        {
+            @Html.Partial("QueryPartials/StatementElements", new { Statement = statement, Index = count })
+            count ++;
+        }
+
+    </div>
+}
+else
+{
+    <div class="statements">
+        @Html.Partial("QueryPartials/StatementElements", new { Statement = new ElasticSearchDemo.Models.QueryBuilder.Statement(), Index = 0 })
+    </div>
+}

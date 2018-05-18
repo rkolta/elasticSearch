@@ -1,0 +1,39 @@
+﻿@model ElasticSearchDemo.Models.QueryBuilder.Query
+
+@{
+    ViewBag.Title = "QueryBuilder";
+}
+@Html.Partial("QueryPartials/FormatError")
+@Html.Partial("QueryPartials/SaveQuery")
+@Html.Partial("QueryPartials/QueryUpdate")
+<div class="row" style="display: flex; flex-wrap: wrap; height: 100%">
+    @Html.Partial("SavedQueries", Model)
+    <div class="col-lg-10">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Create Query
+            </div>
+            <div class="panel-footer">
+                <button class="and-op btn btn-primary">AND</button>
+                <button class="or-op btn btn-primary">OR</button>
+            </div>
+            <div class="panel-body">
+                @Html.Partial("QueryPartials/Statement", Model)
+            </div>
+            <div class="panel-footer">
+                <button class="save btn btn-primary">
+                    <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                    Save</button>
+                <button class="run btn btn-success">
+                    <i class="fa fa-play" aria-hidden="true"></i>
+                    Run</button>
+            </div>
+        </div>
+        @Html.Partial("QueryPartials/QueryResult")
+    </div>
+</div>
+@section scripts{
+    <script>
+        QueryBuilder.BaseUrl = "@Url.Content("~")";
+    </script>
+}

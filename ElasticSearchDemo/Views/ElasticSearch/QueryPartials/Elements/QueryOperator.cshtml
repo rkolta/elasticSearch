@@ -1,0 +1,17 @@
+﻿@model ElasticSearchDemo.Models.QueryBuilder.Statement
+<div class="btn-circle sql-and-operator" data-value="8"
+        @if ((Model.QueryOperatorOpId > 0 && Model.QueryOperator.Symbol != "and") || Model.QueryOperatorOpId == null)
+        {
+            @:style="display: none"
+        }
+        >
+    AND
+</div>
+<div class="btn-circle sql-or-operator" data-value="9"
+        @if ((Model.QueryOperatorOpId > 0 && Model.Operator.Symbol != "or") || Model.QueryOperatorOpId == null)
+        {
+            @:style="display: none"
+        }
+        >
+    OR
+</div>

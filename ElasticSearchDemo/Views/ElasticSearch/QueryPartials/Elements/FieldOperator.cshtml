@@ -1,0 +1,18 @@
+﻿@model ElasticSearchDemo.Models.QueryBuilder.Statement
+@if (Model.Field != null)
+{
+    <select class="form-control operator mb-2 mr-sm-2 mb-sm-0" title="Field">
+        @foreach (var op in Model.Field.Operators)
+        {
+                
+            <option value="@op.OpId" @if (op.OpId == Model.OperatorOpId)
+                                     {<text>selected</text>}>@op.Symbol.ToUpper()</option>
+        }
+
+    </select>
+}
+else
+{
+    <select class="form-control operator mb-2 mr-sm-2 mb-sm-0" title="Field" style="display: none">
+    </select>
+}
